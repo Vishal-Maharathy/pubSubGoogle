@@ -10,7 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
     "@google-cloud/pubsub": "^4.3.2",
-    "dotenv": "^16.4.4"
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.5",
+    "googleapis": "^133.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "node-cache": "^5.1.2"
   }
 }

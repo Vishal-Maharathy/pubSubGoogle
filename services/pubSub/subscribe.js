@@ -8,7 +8,7 @@ const timeout = 60;
 const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
-const pubSubClient = new PubSub({keyFilename: './key.json'});
+const pubSubClient = new PubSub({keyFilename: '../../key.json'});
 
 function listenForMessages(subscriptionNameOrId, timeout) {
   // References an existing subscription
@@ -36,3 +36,7 @@ function listenForMessages(subscriptionNameOrId, timeout) {
   }, timeout * 1000);
 }
 listenForMessages(subscriptionNameOrId, timeout);
+
+module.exports = {
+  listenForMessages
+}

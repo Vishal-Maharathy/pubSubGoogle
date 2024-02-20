@@ -10,7 +10,7 @@ const data = JSON.stringify({success:true, message:'Hello, World!'});
 const {PubSub} = require('@google-cloud/pubsub');
 
 // Creates a client; cache this for further use
-const pubSubClient = new PubSub({keyFilename: './key.json'});
+const pubSubClient = new PubSub({keyFilename: '../../key.json'});
 
 let messageCount = 0;
 async function publishMessage(topicNameOrId, data) {
@@ -18,17 +18,21 @@ async function publishMessage(topicNameOrId, data) {
   const dataBuffer = Buffer.from(data);
 
   try {
-    // setInterval(async() => {
+    setInterval(async() => {
       let data = JSON.stringify({success:true, message:'Hello, World!', messageCount: messageCount++});
       const dataBuffer = Buffer.from(data);
       const messageId = await pubSubClient
         .topic(topicNameOrId)
         .publishMessage({data: dataBuffer});
       console.log(`Message ${messageId} published.`);
-    // }, 5000);
+    }, 5000);
   } catch (error) {
     console.error(`Received error while publishing: ${error.message}`);
     process.exitCode = 1;
   }
 }
 publishMessage(topicNameOrId, data);
+
+module.exports = {
+  publishMessage
+}
