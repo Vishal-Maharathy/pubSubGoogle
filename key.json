@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "clear-healer-414902",
+  "private_key_id": "def2b6f66c903cef5b6e9802711699d521e9228c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2uS7KZX5Vy1Ea\nc8NeD1KgApfQyQOmthq/kRPTyAChFx8g3yVBwhqZSqXmzErliK8c/3JT75GDREi9\nCYW6pbgry9n2ARBCadIw+kKoHdGLUF2hnDucvfPHuUo12mqeYiW8EAu20lBvk/F7\nni9CRAKutB8G30lcNt6S+TvuGiuD4SoKNy7iQDhbLgpWScA4C+WIlEc0BgCYga0Q\nzXP5+mC9Ill9JBD8603sEdW31IOGhlwTddJ9+OxBGZUZTi2SUZ652eu4wDPRkZfA\no1QTFRVVmeUDqmyXy8yHukE6BGdXYeTjaeKoQ5Oy6Xs28d/Lwk78lS83NmMGyHF4\nDMm48dY3AgMBAAECggEADC+xNgYV1RKlxT4HlMGF265rQfKeFTjGSOob6JR0Akpg\npO3CS4PusomJeKk9rNhJrC/sh+Ti5LPMUXCN+YLtk7Ium7BkzWEcXRrbu4ry5jfa\naW8E2hvLDedxfRek47edAlFkTpxGiWJ/CPploXrtXjRyG0sPVqCW2zYsb+FRRKQb\nOvmpJrZnzeJG9NB+EvuKusevYWMgLz1zrj/BobWSMaH6SHJ9swNWCKG5Y/KntZY0\nMkkimXzXBtrurjrYLA0bAU+/qSJO3mpMRVBj1En09VskXkC7c09EAsiSmumGfh3U\nEfsXhnS7dztUF4Gnz47nGNv6+hW7iBIey0O8kUf3aQKBgQDuVP22aPPycRy3i4r0\nVU2Gv9yvyCJVT+Kvp1AlOOqt2vYdcJu2DdiF9/qEZhWsT93ARrawPoxLqx6vHg7j\nCFz4TXgAsOPUvzEPMsyN/yBvUBDQ8NueM5Y2ZXzs9YDDcc1Vcvw9bkzqRtvIwt0Z\nNEleTVS+YzdXjIa/uFh/wSgUSQKBgQDERN08H/Ir/WkZmkqUlleJvvDiFZODAU3T\ngNBWcsfCyHhSb9d3DBo++sDCcnRFkxtXLQGyFDGCfSsUdQDP+jVd4SMGdUgDYwSv\nRabV5CLOiKX/t33Au37PPxcW5ZgCNzBMBETo2j61I2FOcejKYt+uuCZbfDn9ITEi\n/bVpXsWWfwKBgDoQzOuHMIAN3OA/CDC1I7lDv2G4Ud0VJHaFPfqDnnGTGklb6SP2\nxZ0GKKvfL0KXBsDUuafA5W9+FnC10wyvOe9o+Ga6shdgKXS5fKrP0Lgt+prdQ7SM\nfvlryn705VU4wb0i0Z+p4uVlNCD6kOGWIpXuI0prY81ZuG63XCBsD/a5AoGBAKHE\nIJRtwCyBsR5pDQ9q2rutpNyy6+IOMRciFJUsBXmFwaYwiGaWkwtVoYqiyzKNDPvN\nHJiqDCSBBgDWbtT8ZP/7j+LCx5gDBNlxjxC79/RCrI8XrY4s+1fVqDI3ChLJagU9\nf45sU0L45jrBqB0nYTWgkfzVZvY7ZURx2BQBCNoBAoGAUmc81cpARbUYmqWqV1GW\njbsm0q2hhUGFflPCQ5oXdYpXt5JRnePCa4+XyPl2uMKkXUX3DH5O+6SAAUTAJwm7\nKOJrYDEdG2vlrQ4gZeTLGCDwT7BiSmz9nMoInSpK8XiSvLWL0ScS/43POfJqdN7f\nwKg+Sgv+Bp0i0g+CuMJD9KU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "pubsubsystem@clear-healer-414902.iam.gserviceaccount.com",
+  "client_id": "115932503503058611945",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pubsubsystem%40clear-healer-414902.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
