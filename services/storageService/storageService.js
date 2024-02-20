@@ -48,7 +48,7 @@ const uploadFile = async (token,filepath,reqBody) => {
         return response.data;
     } catch (err) {
         // logger.error(`Error in uploadFile: ${err.message}`);
-        throw new Error(err.message);
+        console.log(err)
     }
 }
 

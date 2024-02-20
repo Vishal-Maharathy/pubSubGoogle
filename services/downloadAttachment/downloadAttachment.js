@@ -10,7 +10,7 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 // created automatically when the authorization flow completes for the first
 // time.
 const TOKEN_PATH = path.join(process.cwd(), '../../token.json');
-const CREDENTIALS_PATH = path.join(process.cwd(), '../../credentials.json');
+const CREDENTIALS_PATH = path.join(process.cwd(), './credentials.json');
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -81,30 +81,35 @@ async function authorize() {
 //     });
 // }
 async function getEmails(auth) {
-    const gmail = google.gmail({ version: 'v1', auth });
-    const userId = 'me';
-    const query = 'subject:resume'; // Filter by subject "resume"
-
-    const response = await gmail.users.messages.list({ userId, q: query});
-    const messages = response.data.messages || [];
-    if(messages.length === 0) {
-        console.log(`No emails found with the subject ${query}`);
-        return;
-    }
-    for (const message of messages) {
-        const email = await gmail.users.messages.get({ userId, id: message.id });
-        const attachments = getAttachments(email.data.payload);
-        for (const attachment of attachments) {
-            const attachmentData = await gmail.users.messages.attachments.get({
-                userId,
-                messageId: message.id,
-                id: attachment.id,
-            });
-            const data = attachmentData.data.data;
-            const buff = Buffer.from(data, 'base64');
-            await fs.mkdir('../../attachments', { recursive: true });
-            await fs.writeFile(`../../attachments/${attachment.filename}`, buff);
+    try{
+        const gmail = google.gmail({ version: 'v1', auth });
+        const userId = 'me';
+        const query = 'subject:resume'; // Filter by subject "resume"
+    
+        const response = await gmail.users.messages.list({ userId, q: query});
+        const messages = response.data.messages || [];
+        if(messages.length === 0) {
+            console.log(`No emails found with the subject ${query}`);
+            return;
         }
+        for (const message of messages) {
+            const email = await gmail.users.messages.get({ userId, id: message.id });
+            const attachments = getAttachments(email.data.payload);
+            for (const attachment of attachments) {
+                const attachmentData = await gmail.users.messages.attachments.get({
+                    userId,
+                    messageId: message.id,
+                    id: attachment.id,
+                });
+                const data = attachmentData.data.data;
+                const buff = Buffer.from(data, 'base64');
+                await fs.mkdir('../../attachments', { recursive: true });
+                await fs.writeFile(`../../attachments/${attachment.filename}`, buff);
+                return attachment.filename;
+            }
+        }
+    }catch(err){
+        console.log(err);
     }
 }
 
@@ -135,8 +140,8 @@ function getAttachments(payload) {
 const main = async () => {
     try{
         const auth = await authorize();
-        await getEmails(auth);
-        return { success: true, message: 'Emails downloaded successfully' };
+        let fileName = await getEmails(auth);
+        return { success: true, message: 'Emails downloaded successfully', fileName };
     }catch(err){
         console.log(err);
         return { success: false, message: err.message };

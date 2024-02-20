@@ -1,10 +1,11 @@
 // const { logger: parentLogger } = require('./logger');
 const axios = require("axios");
 // const logger = parentLogger.child({ file: __filename })
-
 const NodeCache = require( "node-cache" );
 let cache = new NodeCache( { stdTTL: 100 } );
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 async function generateJanusToken(clientId,clientSecret,tokenURL,context){
     try{
@@ -45,7 +46,8 @@ const getToken = async (clientId,clientSecret,tokenURL,context)=>{
     if(token === undefined){
         token = await generateJanusToken(clientId,clientSecret,tokenURL,context);
         const after = new Date().valueOf();
-        logger.info(`Function: getToken, Time Elapsed: ${(after-before)/1000} sec`);
+        console.log(`Function: getToken, Time Elapsed: ${(after-before)/1000} sec`);
+        // logger.info(`Function: getToken, Time Elapsed: ${(after-before)/1000} sec`);
         return token;
     }
     const after = new Date().valueOf();

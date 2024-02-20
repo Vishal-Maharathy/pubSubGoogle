@@ -1,6 +1,8 @@
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
+const dotenv = require('dotenv');
+dotenv.config();
 const subscriptionNameOrId = 'testTopic-sub';
 const timeout = 60;
 
@@ -35,8 +37,8 @@ function listenForMessages(subscriptionNameOrId, timeout) {
     console.log(`${messageCount} message(s) received.`);
   }, timeout * 1000);
 }
-listenForMessages(subscriptionNameOrId, timeout);
+listenForMessages(subscriptionNameOrId, 10000);
 
-module.exports = {
-  listenForMessages
-}
+// module.exports = {
+//   listenForMessages
+// }
