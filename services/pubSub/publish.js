@@ -1,20 +1,14 @@
 /**
  * TODO(developer): Uncomment these variables before running the sample.
  */
-const topicNameOrId = 'testTopic';
-const data = JSON.stringify({success:true, message:'Hello, World!'});
-
 // Imports the Google Cloud client library
 const {PubSub} = require('@google-cloud/pubsub');
-
+const path = require('path');
 // Creates a client; cache this for further use
-const pubSubClient = new PubSub({keyFilename: './key.json'});
+const pubSubClient = new PubSub({keyFilename: path.join(__dirname, '../../key.json')});
+console.log(path.join(__dirname, '../../key.json'))
 
-let messageCount = 0;
 async function publishMessage(topicNameOrId, data) {
-  // Publishes the message as a string, e.g. "Hello, world!" or JSON.stringify(someObject)
-  const dataBuffer = Buffer.from(data);
-
   try {
       let msg = JSON.stringify({success:true, message:data});
       const dataBuffer = Buffer.from(msg);
@@ -27,7 +21,7 @@ async function publishMessage(topicNameOrId, data) {
     process.exitCode = 1;
   }
 }
-
+// publishMessage('testTopic', 'Hello, World!');
 module.exports = {
   publishMessage
 }

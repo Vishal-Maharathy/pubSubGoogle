@@ -9,8 +9,8 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = path.join(process.cwd(), '../../token.json');
-const CREDENTIALS_PATH = path.join(process.cwd(), './credentials.json');
+const TOKEN_PATH = path.join(__dirname, '../../token.json');
+const CREDENTIALS_PATH = path.join(__dirname, '../../credentials.json');
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -80,39 +80,6 @@ async function authorize() {
 //         console.log(`- ${label.name}`);
 //     });
 // }
-async function getEmails(auth) {
-    try{
-        const gmail = google.gmail({ version: 'v1', auth });
-        const userId = 'me';
-        const query = 'subject:resume'; // Filter by subject "resume"
-    
-        const response = await gmail.users.messages.list({ userId, q: query});
-        const messages = response.data.messages || [];
-        if(messages.length === 0) {
-            console.log(`No emails found with the subject ${query}`);
-            return;
-        }
-        for (const message of messages) {
-            const email = await gmail.users.messages.get({ userId, id: message.id });
-            const attachments = getAttachments(email.data.payload);
-            for (const attachment of attachments) {
-                const attachmentData = await gmail.users.messages.attachments.get({
-                    userId,
-                    messageId: message.id,
-                    id: attachment.id,
-                });
-                const data = attachmentData.data.data;
-                const buff = Buffer.from(data, 'base64');
-                await fs.mkdir('../../attachments', { recursive: true });
-                await fs.writeFile(`../../attachments/${attachment.filename}`, buff);
-                return attachment.filename;
-            }
-        }
-    }catch(err){
-        console.log(err);
-    }
-}
-
 function getAttachments(payload) {
     const parts = payload.parts;
     if (!parts) return [];
@@ -136,12 +103,46 @@ function getAttachments(payload) {
     }
     return attachments;
 }
-
+async function getEmails(auth) {
+    try{
+        const gmail = google.gmail({ version: 'v1', auth });
+        const userId = 'me';//import from env
+        const query = 'subject:resume'; // import from env
+    
+        const response = await gmail.users.messages.list({ userId, q: query});
+        const messages = response.data.messages || [];
+        if(messages.length === 0) {
+            console.log(`No emails found with the subject ${query}`);
+            return;
+        }
+        //init array
+        let attachmentArr = [];
+        for (const message of messages) {
+            const email = await gmail.users.messages.get({ userId, id: message.id });
+            const attachments = getAttachments(email.data.payload);
+            for (const attachment of attachments) {
+                const attachmentData = await gmail.users.messages.attachments.get({
+                    userId,
+                    messageId: message.id,
+                    id: attachment.id,
+                });
+                const data = attachmentData.data.data;
+                const buff = Buffer.from(data, 'base64');
+                await fs.mkdir(path.join(__dirname, '../../attachments'), { recursive: true });
+                await fs.writeFile(path.join(__dirname, '../../attachments/')+`${attachment.filename}`, buff);
+                attachmentArr.push(attachment.filename);
+            }
+        }
+        return attachmentArr;
+    }catch(err){
+        console.log(err);
+    }
+}
 const main = async () => {
     try{
         const auth = await authorize();
-        let fileName = await getEmails(auth);
-        return { success: true, message: 'Emails downloaded successfully', fileName };
+        let attachments = await getEmails(auth);
+        return { success: true, message: 'Emails downloaded successfully', attachments };
     }catch(err){
         console.log(err);
         return { success: false, message: err.message };
