@@ -6,7 +6,6 @@ const {PubSub} = require('@google-cloud/pubsub');
 const path = require('path');
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub({keyFilename: path.join(__dirname, '../../key.json')});
-console.log(path.join(__dirname, '../../key.json'))
 
 async function publishMessage(topicNameOrId, data) {
   try {

@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const FormData = require('form-data');
 const fs = require('fs');
+const path = require('path');
 
 const getStorageURL = async (token, docId) => {
     try {
@@ -33,6 +34,7 @@ const uploadFile = async (token,filepath,reqBody) => {
             "fileName": reqBody.fileName,
         }
         const formData = new FormData();
+        filepath = path.join(__dirname, '../../attachments/') + `${reqBody.fileName}`;
         formData.append('fileContent', fs.createReadStream(filepath));
         Object.keys(payload).forEach(key => {
             formData.append(key, payload[key]);

@@ -130,7 +130,7 @@ async function getEmails(auth) {
                 const buff = Buffer.from(data, 'base64');
                 await fs.mkdir(path.join(__dirname, '../../attachments'), { recursive: true });
                 await fs.writeFile(path.join(__dirname, '../../attachments/')+`${attachment.filename}`, buff);
-                attachmentArr.push(attachment.filename);
+                attachmentArr.push({attachment: attachment.filename, messageId: message.id});
             }
         }
         return attachmentArr;
